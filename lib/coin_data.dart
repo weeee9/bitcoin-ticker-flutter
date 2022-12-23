@@ -36,8 +36,8 @@ const coinapiHost = "rest.coinapi.io";
 class CoinData {
   CoinData();
 
-  Future getCoinData() async {
-    String bitcoinExchangeRate = "v1/exchangerate/BTC/USD";
+  Future getCoinData(String selectedCurrency) async {
+    String bitcoinExchangeRate = "v1/exchangerate/BTC/$selectedCurrency";
 
     var uri = Uri.https(coinapiHost, bitcoinExchangeRate, {});
 
