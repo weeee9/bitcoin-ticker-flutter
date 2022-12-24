@@ -12,7 +12,7 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedValue = "AUD";
-  double price = 0;
+  String price = "?";
 
   DropdownButton<String> androidDropdownButton() {
     return DropdownButton<String>(
@@ -71,7 +71,7 @@ class _PriceScreenState extends State<PriceScreen> {
       double data = await coinData.getCoinData(selectedCurrency);
 
       setState(() {
-        price = data;
+        price = data.toStringAsPrecision(0);
       });
     } catch (e) {
       print(e);
