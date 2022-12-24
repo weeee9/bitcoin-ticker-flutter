@@ -37,7 +37,10 @@ class CoinData {
   CoinData();
 
   Future getCoinData(String selectedCurrency) async {
-    String bitcoinExchangeRate = "v1/exchangerate/BTC/$selectedCurrency";
+    var priceMap = <String, double>{};
+
+    for (String crypto in cryptoList) {
+      String bitcoinExchangeRate = "v1/exchangerate/$crypto/$selectedCurrency";
 
     var uri = Uri.https(coinapiHost, bitcoinExchangeRate, {});
 
@@ -56,6 +59,9 @@ class CoinData {
     var decodedData = jsonDecode(resp.body);
     double price = decodedData["rate"];
 
-    return price;
+      priceMap[crypto] = price;
+    }
+
+    return priceMap;
   }
 }
